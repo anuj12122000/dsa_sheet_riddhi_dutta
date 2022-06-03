@@ -1,0 +1,36 @@
+
+//leetcode 1537 
+// this solution is accepted
+
+// but this 2 pointer solution is not much intuitive 
+// hum actuall 2 sum maintain karte hain , or fir greedily jaha pe dono elements sameaaye
+//waha ek check lagaate hain fir  ,hum waha ye dono sum ko max bana rahe hain (trick wahe haub)
+//dry run karna is solution ka necessary hain
+
+        int maxSum(vector<int>&nums1,vector<int>&nums2){
+            int i=0;
+            int j = 0;
+            int m  = nums1.size();
+            int n  = nums2.size();
+            int mod = 1000000000 + 7;
+            long long a=0,b=0;
+            while(i<m || j<n){
+                
+                if( i<m &&  (j>=n || nums1[i]<nums2[j])){
+                    a+=nums1[i];
+                    i++;
+                }else if( j<n &&  (i>=m || nums1[i]>nums2[j]) ){
+                    b+=nums2[j];
+                    j++;
+                }else{
+                    a = max(a,b);
+                    b= max(a,b);
+                    a+=nums1[i];
+                    b+=nums1[i];
+                    i++;
+                    j++;                    
+                }               
+            }
+            return max(a,b)%mod;
+        }
+    
