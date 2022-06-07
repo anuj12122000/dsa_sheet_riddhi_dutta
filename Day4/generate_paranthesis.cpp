@@ -1,34 +1,32 @@
-class Solution {
+class Solution
+{
 
 private:
+    void helper(int open, int close, string s, vector<string> &res)
+    {
 
-    void helper(int open , int close , string s, vector<string>&res){
-
-   
-        if(open==0 && close==0){
+        if (open == 0 && close == 0)
+        {
             res.push_back(s);
-            return ;
+            return;
         }
 
-        
-        if(open>0){
-            helper(open-1,close,s+'(',res);
+        if (open > 0)
+        {
+            helper(open - 1, close, s + '(', res);
         }
 
-        if(close>open)
-        helper(open,close-1,s+')',res);
-
-        
-
+        if (close > open)
+            helper(open, close - 1, s + ')', res);
     }
 
-
 public:
-    vector<string> generateParenthesis(int n) {
-        vector<string>res;
-        int open  = n;
+    vector<string> generateParenthesis(int n)
+    {
+        vector<string> res;
+        int open = n;
         int close = n;
-        helper(open,close, "",res);
+        helper(open, close, "", res);
         return res;
     }
 };
